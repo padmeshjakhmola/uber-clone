@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { tokenCache } from "@/lib/auth";
+import { StatusBar } from "react-native";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -48,6 +49,7 @@ export default function RootLayout() {
           <Stack.Screen name="(root)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
+        <StatusBar barStyle="default" />
       </ClerkLoaded>
     </ClerkProvider>
   );
