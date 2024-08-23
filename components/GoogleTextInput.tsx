@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import React from "react";
 import { GoogleInputProps } from "@/types/type";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";

@@ -3,7 +3,7 @@ import DriverCard from "@/components/DriverCard";
 import RideLayout from "@/components/RideLayout";
 import { useDriverStore } from "@/store";
 import { router } from "expo-router";
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 
 const ConfirmRide = () => {
   const { drivers, selectedDriver, setSelectedDriver } = useDriverStore();

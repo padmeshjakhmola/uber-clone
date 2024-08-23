@@ -58,7 +58,14 @@ const Map = () => {
         setDrivers(drivers as MarkerData[]);
       });
     }
-  }, [markers, destinationLatitude, destinationLongitude]);
+  }, [
+    markers,
+    destinationLatitude,
+    destinationLongitude,
+    userLongitude,
+    userLatitude,
+    setDrivers,
+  ]);
 
   if (loading || !userLatitude || !userLongitude) {
     return (

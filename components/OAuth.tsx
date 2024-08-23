@@ -1,7 +1,6 @@
 import { View, Text, Image, Alert } from "react-native";
 import CustomButton from "./CustomButton";
 import { icons } from "@/constants";
-import { useCallback } from "react";
 import { useOAuth } from "@clerk/clerk-expo";
 import { googleOAuth } from "@/lib/auth";
 import { router } from "expo-router";
@@ -9,20 +8,21 @@ import { router } from "expo-router";
 const OAuth = () => {
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
 
-  const handleGoogleSignIn = useCallback(async () => {
-    try {
-      const result = await googleOAuth(startOAuthFlow);
+  const handleGoogleSignIn = async () => {
+    const result = await googleOAuth(startOAuthFlow);
 
-      if (result.code === "session_exists" || result.code === "success") {
-        Alert.alert("Success", "Session Exist. Redirecting to homepage");
-        router.push("/(root)/(tabs)/home");
-      }
-
-      Alert.alert(result.success ? "Success" : "Error", result.message);
-    } catch (err) {
-      console.error("OAuth error", err);
+    if (result.code === "success") {
+      // Alert.alert("Success", "Login Successfully. Redirecting to homepage");
+      router.push("/(root)/(tabs)/home");
     }
-  }, [startOAuthFlow]);
+
+    if (result.code === "session_exists") {
+      Alert.alert("Success", "Session Exist. Redirected to homepage");
+      router.push("/(root)/(tabs)/home");
+    }
+
+    Alert.alert(result.success ? "Success" : "Error", result.message);
+  };
 
   return (
     <View>

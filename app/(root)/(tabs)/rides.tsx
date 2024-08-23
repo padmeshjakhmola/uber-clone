@@ -10,11 +10,10 @@ import { Ride } from "@/types/type";
 const Rides = () => {
   const { user } = useUser();
 
-  const {
-    data: recentRides,
-    loading,
-    error,
-  } = useFetch<Ride[]>(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    // eslint-disable-next-line prettier/prettier
+    `/(api)/ride/${user?.id}`
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-white">

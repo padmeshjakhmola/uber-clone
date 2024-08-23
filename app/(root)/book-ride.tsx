@@ -25,7 +25,7 @@ const BookRide = () => {
       merchantIdentifier="merchant.uber.com"
       urlScheme="myapp" // required for 3D Secure and bank redirects
     >
-      <RideLayout title="Book Ride">
+      <RideLayout title="Book Ride" snapPoints={["30%", "85%"]}>
         <>
           <Text className="text-xl font-JakartaSemiBold mb-3">
             Ride Information

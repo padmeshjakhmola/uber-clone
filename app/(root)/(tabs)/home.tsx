@@ -17,13 +17,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useFetch } from "@/lib/fetch";
+import { Ride } from "@/types/type";
 
 export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const { signOut } = useAuth();
 
-  const { data: recentRides, loading } = useFetch(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    // eslint-disable-next-line prettier/prettier
+    `/(api)/ride/${user?.id}`
+  );
 
   const [hasPermissions, setHasPermissions] = useState<boolean>(false);
 
@@ -65,7 +69,7 @@ export default function Page() {
     };
 
     requestLocation();
-  }, []);
+  }, [setUserLocation]);
 
   return (
     <SafeAreaView className="bg-general-500">
