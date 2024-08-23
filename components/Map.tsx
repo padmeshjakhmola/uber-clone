@@ -33,7 +33,11 @@ const Map = () => {
   });
 
   useEffect(() => {
-    if (Array.isArray(drivers)) {
+    if (
+      Array.isArray(drivers) &&
+      userLatitude !== null &&
+      userLongitude !== null
+    ) {
       if (!userLatitude || !userLatitude) return;
 
       const newMarkers = generateMarkersFromData({
@@ -107,33 +111,35 @@ const Map = () => {
         />
       ))}
 
-      {destinationLatitude && destinationLongitude && (
-        <>
-          <Marker
-            key="destination"
-            coordinate={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            title="Destination"
-            image={icons.pin}
-          />
+      {destinationLatitude &&
+        destinationLongitude &&
+        process.env.EXPO_PUBLIC_GOOGLE_API_KEY && (
+          <>
+            <Marker
+              key="destination"
+              coordinate={{
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+              }}
+              title="Destination"
+              image={icons.pin}
+            />
 
-          <MapViewDirections
-            origin={{
-              latitude: userLatitude,
-              longitude: userLongitude,
-            }}
-            destination={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
-            strokeColor="#0286ff"
-            strokeWidth={3}
-          />
-        </>
-      )}
+            <MapViewDirections
+              origin={{
+                latitude: userLatitude,
+                longitude: userLongitude,
+              }}
+              destination={{
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+              }}
+              apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
+              strokeColor="#0286ff"
+              strokeWidth={3}
+            />
+          </>
+        )}
     </MapView>
   );
 };
