@@ -7,6 +7,7 @@ import { useAuth, useUser } from "@clerk/clerk-expo";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   Image,
   Text,
@@ -23,6 +24,9 @@ export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const { signOut } = useAuth();
+
+  const [regionDestinationLocation, setRegionDestinationLocation] =
+    useState("");
 
   const { data: recentRides, loading } = useFetch<Ride[]>(
     // eslint-disable-next-line prettier/prettier
@@ -41,6 +45,15 @@ export default function Page() {
     longitude: number;
     address: string;
   }) => {
+    let country = "";
+
+    if (location && location.address) {
+      country = location.address.split(",").pop()?.trim() || "";
+    }
+
+    if (regionDestinationLocation !== country) {
+      return Alert.alert("Error", "Please select ride within your region");
+    }
     setDestinationLocation(location);
     router.push("/(root)/find-ride");
   };
@@ -66,6 +79,9 @@ export default function Page() {
         longitude: location.coords?.longitude,
         address: `${address[0].name}, ${address[0].region}`,
       });
+
+      const country = address[0]?.country ?? "";
+      setRegionDestinationLocation(country);
     };
 
     requestLocation();
