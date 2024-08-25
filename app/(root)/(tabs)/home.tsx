@@ -107,6 +107,12 @@ export default function Page() {
               <Text className="font-Jakarta text-sm text-gray-300">
                 Device IP:-{networkIp}
               </Text>
+              <Text className="font-Jakarta text-sm text-gray-300">
+                {process?.env?.NODE_ENV || ""}
+              </Text>
+              <Text className="font-Jakarta text-sm text-gray-300">
+                {window?.location?.origin || ""}
+              </Text>
             </View>
           </>
         )}
@@ -128,6 +134,12 @@ export default function Page() {
                 <Text className="text-sm">No recent rides found</Text>
                 <Text className="font-Jakarta text-sm text-gray-300">
                   Device IP:-{networkIp}
+                </Text>
+                <Text className="font-Jakarta text-sm text-gray-300">
+                  {process?.env?.NODE_ENV || ""}
+                </Text>
+                <Text className="font-Jakarta text-sm text-gray-300">
+                  {window?.location?.origin || ""}
                 </Text>
               </>
             ) : (
