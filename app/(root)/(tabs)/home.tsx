@@ -103,6 +103,15 @@ export default function Page() {
         renderItem={({ item }) => (
           <>
             <RideCard ride={item} />
+          </>
+        )}
+        className="px-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
+        ListFooterComponent={() => (
+          <>
             <View className="flex justify-center items-center">
               <Text className="font-Jakarta text-sm text-gray-300">
                 Device IP:-{networkIp}
@@ -116,11 +125,6 @@ export default function Page() {
             </View>
           </>
         )}
-        className="px-5"
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          paddingBottom: 100,
-        }}
         ListEmptyComponent={() => (
           <View className="flex flex-col items-center justify-center">
             {!loading ? (
