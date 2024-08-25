@@ -19,6 +19,7 @@ import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useFetch } from "@/lib/fetch";
 import { Ride } from "@/types/type";
+import * as Network from "expo-network";
 
 export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
@@ -27,6 +28,8 @@ export default function Page() {
 
   const [regionDestinationLocation, setRegionDestinationLocation] =
     useState("");
+
+  const [networkIp, setNetworkIp] = useState<string | null>(null); // Add state for network IP
 
   const { data: recentRides, loading } = useFetch<Ride[]>(
     // eslint-disable-next-line prettier/prettier
@@ -84,14 +87,29 @@ export default function Page() {
       setRegionDestinationLocation(country);
     };
 
+    const fetchNetworkIp = async () => {
+      const ip = await Network.getIpAddressAsync();
+      setNetworkIp(ip);
+    };
+
     requestLocation();
+    fetchNetworkIp(); // Fetch the network IP
   }, [setUserLocation]);
 
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
         data={recentRides?.slice(0, 5)}
-        renderItem={({ item }) => <RideCard ride={item} />}
+        renderItem={({ item }) => (
+          <>
+            <RideCard ride={item} />
+            <View className="flex justify-center items-center">
+              <Text className="font-Jakarta text-sm text-gray-300">
+                Device IP:-{networkIp}
+              </Text>
+            </View>
+          </>
+        )}
         className="px-5"
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -108,6 +126,9 @@ export default function Page() {
                   resizeMode="contain"
                 />
                 <Text className="text-sm">No recent rides found</Text>
+                <Text className="font-Jakarta text-sm text-gray-300">
+                  Device IP:-{networkIp}
+                </Text>
               </>
             ) : (
               <ActivityIndicator size="small" color="#000" />

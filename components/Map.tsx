@@ -34,6 +34,7 @@ const Map = () => {
 
   useEffect(() => {
     if (
+      drivers !== null &&
       Array.isArray(drivers) &&
       userLatitude !== null &&
       userLongitude !== null
@@ -81,7 +82,7 @@ const Map = () => {
 
   if (error) {
     return (
-      <View className="flex justify-between items-center w-full">
+      <View className="flex justify-between items-center w-full text-red-600">
         <Text>Error: {error}</Text>
       </View>
     );
