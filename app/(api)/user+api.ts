@@ -11,7 +11,7 @@ export async function POST(request: Request) {
           error: "Missing required fields",
         },
         // eslint-disable-next-line prettier/prettier
-        { status: 400 }
+        { status: 400 },
       );
     }
 

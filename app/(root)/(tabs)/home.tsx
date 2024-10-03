@@ -33,7 +33,7 @@ export default function Page() {
 
   const { data: recentRides, loading } = useFetch<Ride[]>(
     // eslint-disable-next-line prettier/prettier
-    `/(api)/ride/${user?.id}`
+    `/(api)/ride/${user?.id}`,
   );
 
   const [hasPermissions, setHasPermissions] = useState<boolean>(false);

@@ -16,7 +16,7 @@ const BookRide = () => {
 
   const driverDetails = drivers?.filter(
     // eslint-disable-next-line prettier/prettier
-    (driver) => +driver.id === selectedDriver
+    (driver) => +driver.id === selectedDriver,
   )[0];
 
   return (

@@ -14,7 +14,7 @@ export async function POST(request: Request) {
           error: "Missing required payment information",
           status: 400,
           // eslint-disable-next-line prettier/prettier
-        })
+        }),
       );
     }
 
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
         message: "Payment confirmed Successfully",
         result: result,
         // eslint-disable-next-line prettier/prettier
-      })
+      }),
     );
   } catch (error) {
     console.error(error);
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
         error: error,
         status: 500,
         // eslint-disable-next-line prettier/prettier
-      })
+      }),
     );
   }
 }

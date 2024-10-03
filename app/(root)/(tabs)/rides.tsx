@@ -12,7 +12,7 @@ const Rides = () => {
 
   const { data: recentRides, loading } = useFetch<Ride[]>(
     // eslint-disable-next-line prettier/prettier
-    `/(api)/ride/${user?.id}`
+    `/(api)/ride/${user?.id}`,
   );
 
   return (

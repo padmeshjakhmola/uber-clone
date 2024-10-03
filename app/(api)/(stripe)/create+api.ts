@@ -11,7 +11,7 @@ export async function POST(request: Request) {
         error: "Please enter a valid email address",
         status: 400,
         // eslint-disable-next-line prettier/prettier
-      })
+      }),
     );
   }
 
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   const ephemeralKey = await stripe.ephemeralKeys.create(
     { customer: customer.id },
     // eslint-disable-next-line prettier/prettier
-    { apiVersion: "2024-06-20" }
+    { apiVersion: "2024-06-20" },
   );
   const paymentIntent = await stripe.paymentIntents.create({
     amount: parseInt(amount) * 100,
@@ -50,6 +50,6 @@ export async function POST(request: Request) {
       ephemeralKey: ephemeralKey,
       customer: customer.id,
       // eslint-disable-next-line prettier/prettier
-    })
+    }),
   );
 }

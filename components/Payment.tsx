@@ -55,7 +55,7 @@ const Payment = ({
           paymentMethod,
           shouldSavePaymentMethod,
           // eslint-disable-next-line prettier/prettier
-          intentCreationCallback
+          intentCreationCallback,
         ) => {
           const { paymentIntent, customer } = await fetchAPI(
             "/(api)/(stripe)/create",
@@ -71,7 +71,7 @@ const Payment = ({
                 paymentMethodId: paymentMethod.id,
               }),
               // eslint-disable-next-line prettier/prettier
-            }
+            },
           );
 
           if (paymentIntent.client_secret) {
